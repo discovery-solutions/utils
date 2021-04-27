@@ -1,13 +1,13 @@
 {
     "name": "@octaldev/utils",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "A collection of helper functions for JS Projects",
     "main": "dist/index.cjs.js",
     "author": "Lucas Craveiro Paes <lucascraveiropaes@gmail.com>",
     "license": "MIT",
     "scripts": {
         "build": "rollup -c",
-        "publish": "npm run build && npm publish"
+        "publish:prod": "npm run build && npm publish"
     },
     "devDependencies": {
         "@babel/cli": "^7.13.16",
