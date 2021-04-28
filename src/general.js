@@ -1,3 +1,8 @@
+import sha512 from "js-sha512";
+
+export function SHA512(value) {
+	return sha512(value);
+}
 
 export function getOS() {
 	try {

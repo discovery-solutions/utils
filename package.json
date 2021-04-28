@@ -1,6 +1,6 @@
 {
     "name": "@octaldev/utils",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "A collection of helper functions for JS Projects",
     "main": "dist/index.cjs.js",
     "author": "Lucas Craveiro Paes <lucascraveiropaes@gmail.com>",
@@ -28,5 +28,8 @@
         "utils",
         "octal",
         "octaldev"
-    ]
+    ],
+    "dependencies": {
+        "js-sha512": "^0.8.0"
+    }
 }

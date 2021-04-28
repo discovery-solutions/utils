@@ -1,13 +1,14 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@babel/runtime/helpers/defineProperty'), require('@babel/runtime/helpers/toConsumableArray'), require('react')) :
-	typeof define === 'function' && define.amd ? define(['@babel/runtime/helpers/defineProperty', '@babel/runtime/helpers/toConsumableArray', 'react'], factory) :
-	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global['@octaldev/react-router'] = factory(global._defineProperty, global._toConsumableArray, global.react));
-}(this, (function (_defineProperty, _toConsumableArray, react) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@babel/runtime/helpers/defineProperty'), require('@babel/runtime/helpers/toConsumableArray'), require('js-sha512'), require('react')) :
+	typeof define === 'function' && define.amd ? define(['@babel/runtime/helpers/defineProperty', '@babel/runtime/helpers/toConsumableArray', 'js-sha512', 'react'], factory) :
+	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global['@octaldev/react-router'] = factory(global._defineProperty, global._toConsumableArray, global.sha512, global.react));
+}(this, (function (_defineProperty, _toConsumableArray, sha512, react) { 'use strict';
 
 	function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
 	var _defineProperty__default = /*#__PURE__*/_interopDefaultLegacy(_defineProperty);
 	var _toConsumableArray__default = /*#__PURE__*/_interopDefaultLegacy(_toConsumableArray);
+	var sha512__default = /*#__PURE__*/_interopDefaultLegacy(sha512);
 
 	function validateEmail(email) {
 	  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -46,6 +47,9 @@
 		isFunction: isFunction
 	});
 
+	function SHA512(value) {
+	  return sha512__default['default'](value);
+	}
 	function getOS() {
 	  try {
 	    if (typeof navigator.product === "string" && navigator.product.toLowerCase().search("react") > -1) {
@@ -109,6 +113,7 @@
 
 	var general = /*#__PURE__*/Object.freeze({
 		__proto__: null,
+		SHA512: SHA512,
 		getOS: getOS,
 		searchInto: searchInto,
 		clearString: clearString,

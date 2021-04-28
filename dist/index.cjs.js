@@ -2,12 +2,14 @@
 
 var _defineProperty = require('@babel/runtime/helpers/defineProperty');
 var _toConsumableArray = require('@babel/runtime/helpers/toConsumableArray');
+var sha512 = require('js-sha512');
 var react = require('react');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
 var _defineProperty__default = /*#__PURE__*/_interopDefaultLegacy(_defineProperty);
 var _toConsumableArray__default = /*#__PURE__*/_interopDefaultLegacy(_toConsumableArray);
+var sha512__default = /*#__PURE__*/_interopDefaultLegacy(sha512);
 
 function validateEmail(email) {
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -46,6 +48,9 @@ var logical = /*#__PURE__*/Object.freeze({
 	isFunction: isFunction
 });
 
+function SHA512(value) {
+  return sha512__default['default'](value);
+}
 function getOS() {
   try {
     if (typeof navigator.product === "string" && navigator.product.toLowerCase().search("react") > -1) {
@@ -109,6 +114,7 @@ function mask(text, mask) {
 
 var general = /*#__PURE__*/Object.freeze({
 	__proto__: null,
+	SHA512: SHA512,
 	getOS: getOS,
 	searchInto: searchInto,
 	clearString: clearString,

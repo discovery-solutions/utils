@@ -1,5 +1,6 @@
 import _defineProperty from '@babel/runtime/helpers/defineProperty';
 import _toConsumableArray from '@babel/runtime/helpers/toConsumableArray';
+import sha512 from 'js-sha512';
 import { useRef, useEffect } from 'react';
 
 function validateEmail(email) {
@@ -39,6 +40,9 @@ var logical = /*#__PURE__*/Object.freeze({
 	isFunction: isFunction
 });
 
+function SHA512(value) {
+  return sha512(value);
+}
 function getOS() {
   try {
     if (typeof navigator.product === "string" && navigator.product.toLowerCase().search("react") > -1) {
@@ -102,6 +106,7 @@ function mask(text, mask) {
 
 var general = /*#__PURE__*/Object.freeze({
 	__proto__: null,
+	SHA512: SHA512,
 	getOS: getOS,
 	searchInto: searchInto,
 	clearString: clearString,
