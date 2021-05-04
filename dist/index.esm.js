@@ -1,6 +1,12 @@
 import _defineProperty from '@babel/runtime/helpers/defineProperty';
 import _toConsumableArray from '@babel/runtime/helpers/toConsumableArray';
 import sha512 from 'js-sha512';
+import _classCallCheck from '@babel/runtime/helpers/classCallCheck';
+import _createClass from '@babel/runtime/helpers/createClass';
+import _inherits from '@babel/runtime/helpers/inherits';
+import _possibleConstructorReturn from '@babel/runtime/helpers/possibleConstructorReturn';
+import _getPrototypeOf from '@babel/runtime/helpers/getPrototypeOf';
+import _wrapNativeSuper from '@babel/runtime/helpers/wrapNativeSuper';
 import { useRef, useEffect } from 'react';
 
 function validateEmail(email) {
@@ -113,6 +119,10 @@ var general = /*#__PURE__*/Object.freeze({
 	mask: mask
 });
 
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
 function elevation(value) {
   var string = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
   var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "#000";
@@ -130,11 +140,46 @@ function elevation(value) {
       height: 0.6 * value
     }
   };
-}
+} // * * * * * upgradeTheme * * * * *
+
+var Color = /*#__PURE__*/function (_String) {
+  _inherits(Color, _String);
+
+  var _super = _createSuper(Color);
+
+  function Color(value) {
+    _classCallCheck(this, Color);
+
+    return _super.call(this, value);
+  }
+
+  _createClass(Color, [{
+    key: "opacity",
+    value: function opacity() {
+      var o = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(this.valueOf());
+      var r = parseInt(result[1], 16);
+      var g = parseInt(result[2], 16);
+      var b = parseInt(result[3], 16);
+      return "rgba(".concat(r, ", ").concat(g, ", ").concat(b, ", ").concat(o, ")");
+    }
+  }]);
+
+  return Color;
+}( /*#__PURE__*/_wrapNativeSuper(String));
+
+function upgradeTheme(theme) {
+  for (var color in theme) {
+    if (typeof theme[color] === "string") theme[color] = new Color(theme[color]);
+  }
+
+  return theme;
+} // * * * * * upgradeTheme * * * * *
 
 var style = /*#__PURE__*/Object.freeze({
 	__proto__: null,
-	elevation: elevation
+	elevation: elevation,
+	upgradeTheme: upgradeTheme
 });
 
 function usePrevious(value) {

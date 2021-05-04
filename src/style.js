@@ -23,3 +23,28 @@ export function elevation(value, string = true, color = "#000") {
 		},
 	};
 }
+
+// * * * * * upgradeTheme * * * * *
+class Color extends String {
+	constructor(value) {
+		super(value);
+	}
+
+	opacity(o = 1) {
+		const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(this.valueOf());
+		const r = parseInt(result[1], 16);
+		const g = parseInt(result[2], 16);
+		const b = parseInt(result[3], 16);
+
+		return `rgba(${r}, ${g}, ${b}, ${o})`;
+	};
+}
+
+export function upgradeTheme(theme) {
+	for (let color in theme)
+		if (typeof theme[color] === "string")
+			theme[color] = new Color(theme[color]);
+
+	return theme;
+}
+// * * * * * upgradeTheme * * * * *

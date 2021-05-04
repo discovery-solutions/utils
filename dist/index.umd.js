@@ -1,14 +1,20 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@babel/runtime/helpers/defineProperty'), require('@babel/runtime/helpers/toConsumableArray'), require('js-sha512'), require('react')) :
-	typeof define === 'function' && define.amd ? define(['@babel/runtime/helpers/defineProperty', '@babel/runtime/helpers/toConsumableArray', 'js-sha512', 'react'], factory) :
-	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global['@octaldev/react-router'] = factory(global._defineProperty, global._toConsumableArray, global.sha512, global.react));
-}(this, (function (_defineProperty, _toConsumableArray, sha512, react) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@babel/runtime/helpers/defineProperty'), require('@babel/runtime/helpers/toConsumableArray'), require('js-sha512'), require('@babel/runtime/helpers/classCallCheck'), require('@babel/runtime/helpers/createClass'), require('@babel/runtime/helpers/inherits'), require('@babel/runtime/helpers/possibleConstructorReturn'), require('@babel/runtime/helpers/getPrototypeOf'), require('@babel/runtime/helpers/wrapNativeSuper'), require('react')) :
+	typeof define === 'function' && define.amd ? define(['@babel/runtime/helpers/defineProperty', '@babel/runtime/helpers/toConsumableArray', 'js-sha512', '@babel/runtime/helpers/classCallCheck', '@babel/runtime/helpers/createClass', '@babel/runtime/helpers/inherits', '@babel/runtime/helpers/possibleConstructorReturn', '@babel/runtime/helpers/getPrototypeOf', '@babel/runtime/helpers/wrapNativeSuper', 'react'], factory) :
+	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global['@octaldev/react-router'] = factory(global._defineProperty, global._toConsumableArray, global.sha512, global._classCallCheck, global._createClass, global._inherits, global._possibleConstructorReturn, global._getPrototypeOf, global._wrapNativeSuper, global.react));
+}(this, (function (_defineProperty, _toConsumableArray, sha512, _classCallCheck, _createClass, _inherits, _possibleConstructorReturn, _getPrototypeOf, _wrapNativeSuper, react) { 'use strict';
 
 	function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
 	var _defineProperty__default = /*#__PURE__*/_interopDefaultLegacy(_defineProperty);
 	var _toConsumableArray__default = /*#__PURE__*/_interopDefaultLegacy(_toConsumableArray);
 	var sha512__default = /*#__PURE__*/_interopDefaultLegacy(sha512);
+	var _classCallCheck__default = /*#__PURE__*/_interopDefaultLegacy(_classCallCheck);
+	var _createClass__default = /*#__PURE__*/_interopDefaultLegacy(_createClass);
+	var _inherits__default = /*#__PURE__*/_interopDefaultLegacy(_inherits);
+	var _possibleConstructorReturn__default = /*#__PURE__*/_interopDefaultLegacy(_possibleConstructorReturn);
+	var _getPrototypeOf__default = /*#__PURE__*/_interopDefaultLegacy(_getPrototypeOf);
+	var _wrapNativeSuper__default = /*#__PURE__*/_interopDefaultLegacy(_wrapNativeSuper);
 
 	function validateEmail(email) {
 	  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -120,6 +126,10 @@
 		mask: mask
 	});
 
+	function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf__default['default'](Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf__default['default'](this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn__default['default'](this, result); }; }
+
+	function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
 	function elevation(value) {
 	  var string = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 	  var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "#000";
@@ -137,11 +147,46 @@
 	      height: 0.6 * value
 	    }
 	  };
-	}
+	} // * * * * * upgradeTheme * * * * *
+
+	var Color = /*#__PURE__*/function (_String) {
+	  _inherits__default['default'](Color, _String);
+
+	  var _super = _createSuper(Color);
+
+	  function Color(value) {
+	    _classCallCheck__default['default'](this, Color);
+
+	    return _super.call(this, value);
+	  }
+
+	  _createClass__default['default'](Color, [{
+	    key: "opacity",
+	    value: function opacity() {
+	      var o = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+	      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(this.valueOf());
+	      var r = parseInt(result[1], 16);
+	      var g = parseInt(result[2], 16);
+	      var b = parseInt(result[3], 16);
+	      return "rgba(".concat(r, ", ").concat(g, ", ").concat(b, ", ").concat(o, ")");
+	    }
+	  }]);
+
+	  return Color;
+	}( /*#__PURE__*/_wrapNativeSuper__default['default'](String));
+
+	function upgradeTheme(theme) {
+	  for (var color in theme) {
+	    if (typeof theme[color] === "string") theme[color] = new Color(theme[color]);
+	  }
+
+	  return theme;
+	} // * * * * * upgradeTheme * * * * *
 
 	var style = /*#__PURE__*/Object.freeze({
 		__proto__: null,
-		elevation: elevation
+		elevation: elevation,
+		upgradeTheme: upgradeTheme
 	});
 
 	function usePrevious(value) {
