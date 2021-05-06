@@ -7,7 +7,7 @@ export function SHA512(value) {
 export function getOS() {
 	try {
 		if (typeof navigator.product === "string" && navigator.product.toLowerCase().search("react") > -1) {
-            const lib = "react-native";
+            const lib = "react-native"; // eslint-ignore-next-line
 			return require(lib).Platform.OS === "ios" ? "iOS" : "Android";
 		}
 

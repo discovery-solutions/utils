@@ -52,7 +52,8 @@ function SHA512(value) {
 function getOS() {
   try {
     if (typeof navigator.product === "string" && navigator.product.toLowerCase().search("react") > -1) {
-      var lib = "react-native";
+      var lib = "react-native"; // eslint-ignore-next-line
+
       return require(lib).Platform.OS === "ios" ? "iOS" : "Android";
     }
 
@@ -147,10 +148,10 @@ var Color = /*#__PURE__*/function (_String) {
 
   var _super = _createSuper(Color);
 
-  function Color(value) {
+  function Color() {
     _classCallCheck(this, Color);
 
-    return _super.call(this, value);
+    return _super.apply(this, arguments);
   }
 
   _createClass(Color, [{
