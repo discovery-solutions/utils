@@ -204,10 +204,26 @@ function usePrevious(value) {
   });
   return ref.current;
 }
+function useClickAway(callback) {
+  var dependencies = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+  react.useEffect(function () {
+    try {
+      if ("addEventListener" in window.document) {
+        window.document.addEventListener("mousedown", callback);
+        return function () {
+          return window.document.removeEventListener("mousedown", callback);
+        };
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }, dependencies);
+}
 
 var hooks = /*#__PURE__*/Object.freeze({
 	__proto__: null,
-	usePrevious: usePrevious
+	usePrevious: usePrevious,
+	useClickAway: useClickAway
 });
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
