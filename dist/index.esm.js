@@ -128,6 +128,10 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
+function capitalize(s) {
+  if (typeof s !== "string") return "";
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
 function elevation(value) {
   var string = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
   var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "#000";
@@ -183,6 +187,7 @@ function upgradeTheme(theme) {
 
 var style = /*#__PURE__*/Object.freeze({
 	__proto__: null,
+	capitalize: capitalize,
 	elevation: elevation,
 	upgradeTheme: upgradeTheme
 });
@@ -219,7 +224,6 @@ var hooks = /*#__PURE__*/Object.freeze({
 function hasParentClass(element, className) {
   try {
     do {
-      if (element.classList) console.log(element.classList);
       if (element.classList && element.classList.contains(className)) return true;
       element = element.parentNode;
     } while (element);

@@ -1,4 +1,9 @@
+export function capitalize(s) {
+	if (typeof s !== "string")
+		return "";
 
+	return s.charAt(0).toUpperCase() + s.slice(1)
+}
 
 export function elevation(value, string = true, color = "#000") {
 	if (string) {
