@@ -39,3 +39,7 @@ export function validatePhone(phone) {
 export function isFunction(fn) {
 	return typeof fn === "function";
 }
+
+export function compareObjects(obj1, obj2) {
+	return JSON.stringify(obj1) === JSON.stringify(obj2);
+}

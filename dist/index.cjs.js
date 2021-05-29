@@ -51,13 +51,17 @@ function validatePhone(phone) {
 function isFunction(fn) {
   return typeof fn === "function";
 }
+function compareObjects(obj1, obj2) {
+  return JSON.stringify(obj1) === JSON.stringify(obj2);
+}
 
 var logical = /*#__PURE__*/Object.freeze({
 	__proto__: null,
 	validateEmail: validateEmail,
 	validateCPF: validateCPF,
 	validatePhone: validatePhone,
-	isFunction: isFunction
+	isFunction: isFunction,
+	compareObjects: compareObjects
 });
 
 function SHA512(value) {
