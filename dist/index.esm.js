@@ -7,7 +7,7 @@ import _inherits from '@babel/runtime/helpers/inherits';
 import _possibleConstructorReturn from '@babel/runtime/helpers/possibleConstructorReturn';
 import _getPrototypeOf from '@babel/runtime/helpers/getPrototypeOf';
 import _wrapNativeSuper from '@babel/runtime/helpers/wrapNativeSuper';
-import { useRef, useEffect as useEffect$1 } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import _slicedToArray from '@babel/runtime/helpers/slicedToArray';
 
 function validateEmail(email) {
@@ -195,14 +195,14 @@ var style = /*#__PURE__*/Object.freeze({
 
 function usePrevious(value) {
   var ref = useRef(value);
-  useEffect$1(function () {
+  useEffect(function () {
     ref.current = value;
   });
   return ref.current;
 }
 function useClickAway(callback) {
   var dependencies = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-  useEffect$1(function () {
+  useEffect(function () {
     try {
       if ("addEventListener" in window.document) {
         window.document.addEventListener("mousedown", callback);
@@ -236,6 +236,8 @@ function hasParentClass(element, className) {
   }
 }
 function useMousePosition() {
+  if ("addEventListener" in window === false) return false;
+
   try {
     var _useState = useState([null, null]),
         _useState2 = _slicedToArray(_useState, 2),

@@ -251,8 +251,10 @@ function hasParentClass(element, className) {
   }
 }
 function useMousePosition() {
+  if ("addEventListener" in window === false) return false;
+
   try {
-    var _useState = useState([null, null]),
+    var _useState = react.useState([null, null]),
         _useState2 = _slicedToArray__default['default'](_useState, 2),
         mousePosition = _useState2[0],
         setMousePosition = _useState2[1];
@@ -261,7 +263,7 @@ function useMousePosition() {
       return setMousePosition([e.clientX, e.clientY]);
     };
 
-    useEffect(function () {
+    react.useEffect(function () {
       window.addEventListener("mousemove", updateMousePosition);
       return function () {
         return window.removeEventListener("mousemove", updateMousePosition);

@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from "react";
+
 export function hasParentClass(element, className) {
     try {
         do {
@@ -15,6 +17,9 @@ export function hasParentClass(element, className) {
 }
 
 export function useMousePosition() {
+    if (("addEventListener" in window) === false)
+        return false;
+
     try {
         const [ mousePosition, setMousePosition ] = useState([null, null]);
 
