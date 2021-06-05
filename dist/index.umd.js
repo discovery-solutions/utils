@@ -1,8 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@babel/runtime/helpers/defineProperty'), require('@babel/runtime/helpers/toConsumableArray'), require('js-sha512'), require('@babel/runtime/helpers/classCallCheck'), require('@babel/runtime/helpers/createClass'), require('@babel/runtime/helpers/inherits'), require('@babel/runtime/helpers/possibleConstructorReturn'), require('@babel/runtime/helpers/getPrototypeOf'), require('@babel/runtime/helpers/wrapNativeSuper'), require('react')) :
-	typeof define === 'function' && define.amd ? define(['@babel/runtime/helpers/defineProperty', '@babel/runtime/helpers/toConsumableArray', 'js-sha512', '@babel/runtime/helpers/classCallCheck', '@babel/runtime/helpers/createClass', '@babel/runtime/helpers/inherits', '@babel/runtime/helpers/possibleConstructorReturn', '@babel/runtime/helpers/getPrototypeOf', '@babel/runtime/helpers/wrapNativeSuper', 'react'], factory) :
-	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global['@octaldev/react-router'] = factory(global._defineProperty, global._toConsumableArray, global.sha512, global._classCallCheck, global._createClass, global._inherits, global._possibleConstructorReturn, global._getPrototypeOf, global._wrapNativeSuper, global.react));
-}(this, (function (_defineProperty, _toConsumableArray, sha512, _classCallCheck, _createClass, _inherits, _possibleConstructorReturn, _getPrototypeOf, _wrapNativeSuper, react) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@babel/runtime/helpers/defineProperty'), require('@babel/runtime/helpers/toConsumableArray'), require('js-sha512'), require('@babel/runtime/helpers/classCallCheck'), require('@babel/runtime/helpers/createClass'), require('@babel/runtime/helpers/inherits'), require('@babel/runtime/helpers/possibleConstructorReturn'), require('@babel/runtime/helpers/getPrototypeOf'), require('@babel/runtime/helpers/wrapNativeSuper'), require('react'), require('@babel/runtime/helpers/slicedToArray')) :
+	typeof define === 'function' && define.amd ? define(['@babel/runtime/helpers/defineProperty', '@babel/runtime/helpers/toConsumableArray', 'js-sha512', '@babel/runtime/helpers/classCallCheck', '@babel/runtime/helpers/createClass', '@babel/runtime/helpers/inherits', '@babel/runtime/helpers/possibleConstructorReturn', '@babel/runtime/helpers/getPrototypeOf', '@babel/runtime/helpers/wrapNativeSuper', 'react', '@babel/runtime/helpers/slicedToArray'], factory) :
+	(global = typeof globalThis !== 'undefined' ? globalThis : global || self, global['@octaldev/react-router'] = factory(global._defineProperty, global._toConsumableArray, global.sha512, global._classCallCheck, global._createClass, global._inherits, global._possibleConstructorReturn, global._getPrototypeOf, global._wrapNativeSuper, global.react, global._slicedToArray));
+}(this, (function (_defineProperty, _toConsumableArray, sha512, _classCallCheck, _createClass, _inherits, _possibleConstructorReturn, _getPrototypeOf, _wrapNativeSuper, react, _slicedToArray) { 'use strict';
 
 	function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -15,6 +15,7 @@
 	var _possibleConstructorReturn__default = /*#__PURE__*/_interopDefaultLegacy(_possibleConstructorReturn);
 	var _getPrototypeOf__default = /*#__PURE__*/_interopDefaultLegacy(_getPrototypeOf);
 	var _wrapNativeSuper__default = /*#__PURE__*/_interopDefaultLegacy(_wrapNativeSuper);
+	var _slicedToArray__default = /*#__PURE__*/_interopDefaultLegacy(_slicedToArray);
 
 	function validateEmail(email) {
 	  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -241,10 +242,33 @@
 	    return false;
 	  }
 	}
+	function useMousePosition() {
+	  try {
+	    var _useState = useState([null, null]),
+	        _useState2 = _slicedToArray__default['default'](_useState, 2),
+	        mousePosition = _useState2[0],
+	        setMousePosition = _useState2[1];
+
+	    var updateMousePosition = function updateMousePosition(e) {
+	      return setMousePosition([e.clientX, e.clientY]);
+	    };
+
+	    useEffect(function () {
+	      window.addEventListener("mousemove", updateMousePosition);
+	      return function () {
+	        return window.removeEventListener("mousemove", updateMousePosition);
+	      };
+	    }, []);
+	    return mousePosition;
+	  } catch (e) {
+	    return [undefined, undefined];
+	  }
+	}
 
 	var web = /*#__PURE__*/Object.freeze({
 		__proto__: null,
-		hasParentClass: hasParentClass
+		hasParentClass: hasParentClass,
+		useMousePosition: useMousePosition
 	});
 
 	function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }

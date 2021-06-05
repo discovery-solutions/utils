@@ -7,7 +7,8 @@ import _inherits from '@babel/runtime/helpers/inherits';
 import _possibleConstructorReturn from '@babel/runtime/helpers/possibleConstructorReturn';
 import _getPrototypeOf from '@babel/runtime/helpers/getPrototypeOf';
 import _wrapNativeSuper from '@babel/runtime/helpers/wrapNativeSuper';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect as useEffect$1 } from 'react';
+import _slicedToArray from '@babel/runtime/helpers/slicedToArray';
 
 function validateEmail(email) {
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -194,14 +195,14 @@ var style = /*#__PURE__*/Object.freeze({
 
 function usePrevious(value) {
   var ref = useRef(value);
-  useEffect(function () {
+  useEffect$1(function () {
     ref.current = value;
   });
   return ref.current;
 }
 function useClickAway(callback) {
   var dependencies = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-  useEffect(function () {
+  useEffect$1(function () {
     try {
       if ("addEventListener" in window.document) {
         window.document.addEventListener("mousedown", callback);
@@ -234,10 +235,33 @@ function hasParentClass(element, className) {
     return false;
   }
 }
+function useMousePosition() {
+  try {
+    var _useState = useState([null, null]),
+        _useState2 = _slicedToArray(_useState, 2),
+        mousePosition = _useState2[0],
+        setMousePosition = _useState2[1];
+
+    var updateMousePosition = function updateMousePosition(e) {
+      return setMousePosition([e.clientX, e.clientY]);
+    };
+
+    useEffect(function () {
+      window.addEventListener("mousemove", updateMousePosition);
+      return function () {
+        return window.removeEventListener("mousemove", updateMousePosition);
+      };
+    }, []);
+    return mousePosition;
+  } catch (e) {
+    return [undefined, undefined];
+  }
+}
 
 var web = /*#__PURE__*/Object.freeze({
 	__proto__: null,
-	hasParentClass: hasParentClass
+	hasParentClass: hasParentClass,
+	useMousePosition: useMousePosition
 });
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }

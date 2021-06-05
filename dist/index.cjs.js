@@ -10,6 +10,7 @@ var _possibleConstructorReturn = require('@babel/runtime/helpers/possibleConstru
 var _getPrototypeOf = require('@babel/runtime/helpers/getPrototypeOf');
 var _wrapNativeSuper = require('@babel/runtime/helpers/wrapNativeSuper');
 var react = require('react');
+var _slicedToArray = require('@babel/runtime/helpers/slicedToArray');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -22,6 +23,7 @@ var _inherits__default = /*#__PURE__*/_interopDefaultLegacy(_inherits);
 var _possibleConstructorReturn__default = /*#__PURE__*/_interopDefaultLegacy(_possibleConstructorReturn);
 var _getPrototypeOf__default = /*#__PURE__*/_interopDefaultLegacy(_getPrototypeOf);
 var _wrapNativeSuper__default = /*#__PURE__*/_interopDefaultLegacy(_wrapNativeSuper);
+var _slicedToArray__default = /*#__PURE__*/_interopDefaultLegacy(_slicedToArray);
 
 function validateEmail(email) {
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -248,10 +250,33 @@ function hasParentClass(element, className) {
     return false;
   }
 }
+function useMousePosition() {
+  try {
+    var _useState = useState([null, null]),
+        _useState2 = _slicedToArray__default['default'](_useState, 2),
+        mousePosition = _useState2[0],
+        setMousePosition = _useState2[1];
+
+    var updateMousePosition = function updateMousePosition(e) {
+      return setMousePosition([e.clientX, e.clientY]);
+    };
+
+    useEffect(function () {
+      window.addEventListener("mousemove", updateMousePosition);
+      return function () {
+        return window.removeEventListener("mousemove", updateMousePosition);
+      };
+    }, []);
+    return mousePosition;
+  } catch (e) {
+    return [undefined, undefined];
+  }
+}
 
 var web = /*#__PURE__*/Object.freeze({
 	__proto__: null,
-	hasParentClass: hasParentClass
+	hasParentClass: hasParentClass,
+	useMousePosition: useMousePosition
 });
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
