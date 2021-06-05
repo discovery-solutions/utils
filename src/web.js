@@ -13,3 +13,21 @@ export function hasParentClass(element, className) {
         return false;
     }
 }
+
+export function useMousePosition() {
+    try {
+        const [ mousePosition, setMousePosition ] = useState([null, null]);
+
+        const updateMousePosition = e => setMousePosition([ e.clientX, e.clientY ]);
+
+        useEffect(() => {
+            window.addEventListener("mousemove", updateMousePosition);
+
+            return () => window.removeEventListener("mousemove", updateMousePosition);
+        }, []);
+
+        return mousePosition;
+    } catch (e) {
+        return [undefined, undefined];
+    }
+}
