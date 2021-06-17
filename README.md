@@ -1,9 +1,9 @@
-# @octaldev/utils
+# @discovery/utils
 
 Uma coleção de funções helpers para projetos Javascript
 
 ```sh
-npm i --save @octaldev/utils
+npm i --save @discovery/utils
 ```
 
 ### Conteúdo
@@ -16,7 +16,7 @@ A importação da lib é como o exemplo a seguir:
 
 _App.js_
 ```js
-import Utils from "@octaldev/utils";
+import Utils from "@discovery/utils";
 
 Utils.searchInto("bánãnâ", "AN") // true
 ```
