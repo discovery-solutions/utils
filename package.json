@@ -1,13 +1,13 @@
 {
-    "name": "@discovery/utils",
-    "version": "0.0.14",
+    "name": "@discovery-solutions/utils",
+    "version": "0.0.1",
     "description": "A collection of helper functions for JS Projects",
     "main": "dist/index.cjs.js",
     "author": "Lucas Craveiro Paes <lucascraveiropaes@gmail.com>",
     "license": "MIT",
     "scripts": {
         "build": "rollup -c",
-        "publish:prod": "npm run build && npm publish"
+        "publish:prod": "npm run build && npm publish --access public"
     },
     "devDependencies": {
         "@babel/cli": "^7.13.16",
@@ -20,13 +20,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "http://dhpp.homelinux.com:14500/8d-packages/utils"
+        "url": "http://github.com/discovery-solutions/utils"
     },
     "keywords": [
         "react",
         "react-native",
         "utils",
-        "discovery"
+        "discovery",
+        "discovery-solutions"
     ],
     "dependencies": {
         "js-sha512": "^0.8.0"
